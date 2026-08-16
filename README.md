@@ -230,40 +230,5 @@ simulations used to validate the guarantees empirically.
 npx tsc --noEmit && npm run lint
 ```
 
----
 
-## Documentation
-
-| Document | Contents |
-| --- | --- |
-| **[User guide](docs/USER_GUIDE.md)** | **Full walkthrough of every screen, with screenshots** |
-| [Architecture](docs/architecture.md) | Component design and data flow |
-| [Privacy model](docs/privacy-model.md) | Mechanisms, sensitivity, composition |
-| [Threat model](docs/threat-model.md) | Attacker capabilities and mitigations |
-| [API reference](docs/api.md) | Endpoint contracts |
-| [Deployment](docs/deployment.md) | Production notes |
-| [Design system](docs/DESIGN.md) | Visual language, tokens, typography |
-| [Runbook](RUNBOOK.md) | Local setup and live verification steps |
-
----
-
-## Limitations
-
-Stated plainly, because a privacy tool that overstates itself is worse than one
-that does less.
-
-- **Trusted curator model.** The worker sees plaintext; the trust boundary is
-  the worker process. This is not local DP or encrypted computation.
-- **Floating-point noise.** Sampling is vulnerable to Mironov's (2012)
-  low-order-bit attack. A discrete Laplace implementation using only integer
-  and rational arithmetic is included; the snapping mechanism and discrete
-  Gaussian are not.
-- **Sequential composition only.** Rényi/zCDP accounting would give tighter
-  bounds at high query volumes.
-- **Contribution bounds are a policy claim.** The system enforces the bound the
-  owner declares; setting it correctly requires knowledge of the data.
-- **Performance.** ~4s per query — the worker decrypts and reads Parquet on
-  every request, with no caching.
-
-See [threat model](docs/threat-model.md) for the full analysis.
 
