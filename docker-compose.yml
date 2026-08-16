@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.local
+    environment:
+      ANALYTICS_WORKER_URL: http://worker:8080
+    ports: ["3000:3000"]
+    depends_on:
+      worker:
+        condition: service_healthy
+    restart: unless-stopped
+  worker:
+    build: ./services/analytics-worker
+    env_file: ./services/analytics-worker/.env
+    expose: ["8080"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5

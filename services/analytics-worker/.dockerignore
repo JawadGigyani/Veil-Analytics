@@ -1,0 +1,8 @@
+.env
+.pytest_cache
+__pycache__
+tests
+*.log
+*.parquet
+.veil-storage
+venv

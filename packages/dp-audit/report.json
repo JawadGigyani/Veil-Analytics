@@ -1,0 +1,310 @@
+{
+  "generated_at": "2026-08-15T22:32:57.665396+00:00",
+  "epsilons": [
+    0.1,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "parameters": {
+    "reconstruction": {
+      "n_rows": 200,
+      "n_queries": 200
+    },
+    "membership_inference": {
+      "n_trials": 500,
+      "base_count": 50
+    },
+    "budgeted": {
+      "epsilon_total": 5.0,
+      "k_sweep": [
+        10,
+        50,
+        100,
+        200,
+        500,
+        1000
+      ]
+    },
+    "epsilon_estimation": {
+      "n_samples": 6000,
+      "n_bins": 50,
+      "alpha": 0.05,
+      "tolerance": 0.05
+    }
+  },
+  "reconstruction_unbudgeted": [
+    {
+      "condition": "exact",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 1.0,
+      "epsilon": null,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 0.5,
+      "epsilon": 0.1,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 0.565,
+      "epsilon": 0.5,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 0.525,
+      "epsilon": 1.0,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 0.575,
+      "epsilon": 2.0,
+      "epsilon_total": null
+    }
+  ],
+  "reconstruction_budgeted": [
+    {
+      "condition": "exact",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 1.0,
+      "epsilon": null,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 10,
+      "accuracy": 0.615,
+      "epsilon": 0.5,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 50,
+      "accuracy": 0.54,
+      "epsilon": 0.1,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 100,
+      "accuracy": 0.62,
+      "epsilon": 0.05,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 200,
+      "accuracy": 0.54,
+      "epsilon": 0.025,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 500,
+      "accuracy": 0.5,
+      "epsilon": 0.01,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_rows": 200,
+      "n_queries": 1000,
+      "accuracy": 0.525,
+      "epsilon": 0.005,
+      "epsilon_total": 5.0
+    }
+  ],
+  "membership_inference_unbudgeted": [
+    {
+      "condition": "exact",
+      "n_trials": 500,
+      "auc": 1.0,
+      "epsilon": null,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_trials": 500,
+      "auc": 0.508364,
+      "epsilon": 0.1,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_trials": 500,
+      "auc": 0.631562,
+      "epsilon": 0.5,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_trials": 500,
+      "auc": 0.686124,
+      "epsilon": 1.0,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_unbudgeted",
+      "n_trials": 500,
+      "auc": 0.8171,
+      "epsilon": 2.0,
+      "epsilon_total": null
+    }
+  ],
+  "membership_inference_budgeted": [
+    {
+      "condition": "exact",
+      "n_trials": 1000,
+      "auc": 1.0,
+      "epsilon": null,
+      "epsilon_total": null
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 10,
+      "auc": 0.615,
+      "epsilon": 0.5,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 50,
+      "auc": 0.555,
+      "epsilon": 0.1,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 100,
+      "auc": 0.51295,
+      "epsilon": 0.05,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 200,
+      "auc": 0.5148,
+      "epsilon": 0.025,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 500,
+      "auc": 0.5219,
+      "epsilon": 0.01,
+      "epsilon_total": 5.0
+    },
+    {
+      "condition": "dp_budgeted",
+      "n_trials": 1000,
+      "auc": 0.4884525,
+      "epsilon": 0.005,
+      "epsilon_total": 5.0
+    }
+  ],
+  "epsilon_estimation": [
+    {
+      "mechanism": "private_count",
+      "claimed_epsilon": 0.1,
+      "estimated_epsilon": 0.0,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_sum",
+      "claimed_epsilon": 0.1,
+      "estimated_epsilon": 0.0,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_mean",
+      "claimed_epsilon": 0.1,
+      "estimated_epsilon": 0.0,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_count",
+      "claimed_epsilon": 0.5,
+      "estimated_epsilon": 0.31474267585667104,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_sum",
+      "claimed_epsilon": 0.5,
+      "estimated_epsilon": 0.2776919749060708,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_mean",
+      "claimed_epsilon": 0.5,
+      "estimated_epsilon": 0.1692866759479698,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_count",
+      "claimed_epsilon": 1.0,
+      "estimated_epsilon": 0.7261269502023067,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_sum",
+      "claimed_epsilon": 1.0,
+      "estimated_epsilon": 0.7822503619102559,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_mean",
+      "claimed_epsilon": 1.0,
+      "estimated_epsilon": 0.25758925215226025,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_count",
+      "claimed_epsilon": 2.0,
+      "estimated_epsilon": 1.6611096754005685,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_sum",
+      "claimed_epsilon": 2.0,
+      "estimated_epsilon": 1.5800012329140327,
+      "n_samples": 6000,
+      "within_claim": true
+    },
+    {
+      "mechanism": "private_bounded_mean",
+      "claimed_epsilon": 2.0,
+      "estimated_epsilon": 0.663461985163796,
+      "n_samples": 6000,
+      "within_claim": true
+    }
+  ]
+}

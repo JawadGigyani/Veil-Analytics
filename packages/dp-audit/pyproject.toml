@@ -1,0 +1,32 @@
+[project]
+name = "veil-dp-audit"
+version = "0.1.0"
+description = "Attack demonstrations and statistical DP verification for Veil Analytics: reconstruction attacks, membership inference, and empirical epsilon estimation."
+requires-python = ">=3.12"
+dependencies = [
+  # veil-dp-core supplies the mechanisms under audit.
+  "veil-dp-core",
+  # numpy is used for synthetic data generation and attack-side linear
+  # algebra/sampling -- never for anything that stands in for a privacy
+  # mechanism.  scipy supplies the least-squares solver and normal quantiles.
+  "numpy>=2,<3",
+  "scipy>=1.14,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["dp_audit*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = [
+  "slow: genuinely slow tests, excluded from the default fast run",
+]

@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  python:
+    name: Python suites
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "packages/dp-core[dev]"
+          pip install -e "packages/query-ir[dev]"
+          pip install -e "services/analytics-worker[dev]"
+
+      - name: Run all Python suites
+        # Live Supabase tests stay skipped unless RUN_LIVE_SUPABASE_TESTS is set.
+        env:
+          ENCRYPTION_KEY: ${{ secrets.CI_FERNET_KEY || 'FVaLUiTM7wLg4hOsvzKlPPGa1MZ8Zh8HpsHNq_kkkfM=' }}
+          WORKER_TOKEN: ci-test-token
+        run: python scripts/run_tests.py
+
+      - name: Install pip-audit
+        run: pip install pip-audit
+
+      # Advisory only, for now: dependency scanning is new here and the
+      # existing pinned versions have not been triaged against it yet. A red
+      # CI run over a transitive advisory nobody has looked at yet helps no
+      # one on day one. Findings should be reviewed and this should be made
+      # blocking once the current dependency set is clean or exceptions are
+      # recorded.
+      - name: Scan Python dependencies (pip-audit)
+        continue-on-error: true
+        run: pip-audit
+
+  node:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npx tsc --noEmit
+
+      - run: npm test
+
+      # Advisory only, for now: same reasoning as the Python job above --
+      # non-blocking until the current advisories (if any) are triaged, so a
+      # transitive high-severity finding nobody has reviewed doesn't redden
+      # every PR on day one.
+      - name: Scan Node dependencies (npm audit)
+        continue-on-error: true
+        run: npm audit --audit-level=high
+
+      - name: Production build
+        env:
+          # Build-time placeholders. No real project is contacted; route
+          # handlers are dynamic and never execute during the build.
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+        run: npm run build

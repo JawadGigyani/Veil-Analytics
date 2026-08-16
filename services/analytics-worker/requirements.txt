@@ -1,0 +1,32 @@
+# Veil Analytics worker (backend)
+# Python >= 3.12
+#
+# From this directory, with your venv activated:
+#   pip install -r requirements.txt
+#
+# Local packages (required)
+-e ../../packages/dp-core
+-e ../../packages/query-ir
+
+# API / server
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+python-multipart>=0.0.20,<1
+pydantic>=2.7,<3
+pydantic-settings>=2.7,<3
+
+# Analytics / data
+duckdb>=1.2,<2
+pyarrow>=19,<20
+pandas>=2.2,<3
+numpy>=1.26,<3
+scipy>=1.14,<2
+
+# Security / storage
+cryptography>=44,<45
+supabase>=2.13,<3
+
+# Optional: tests (uncomment if you want pytest in the same venv)
+# pytest>=8,<9
+# hypothesis>=6.100,<7
+# httpx>=0.27,<1

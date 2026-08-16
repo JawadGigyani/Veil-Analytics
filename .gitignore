@@ -1,0 +1,85 @@
+# ---------------------------------------------------------------------------
+# Secrets
+# ---------------------------------------------------------------------------
+# .env.local holds the Supabase service-role key and the worker token; the
+# worker's own .env holds the Fernet encryption key that every protected
+# dataset is encrypted with. Committing either is equivalent to publishing the
+# datasets themselves.
+.env
+.env.*
+!.env.example
+services/analytics-worker/.env
+
+# ---------------------------------------------------------------------------
+# Protected data
+# ---------------------------------------------------------------------------
+# Encrypted Parquet written by the analytics worker at ingestion. Encrypted at
+# rest, but the key lives in the same tree, so this never belongs in version
+# control.
+.veil-storage/
+services/analytics-worker/.veil-storage/
+services/analytics-worker/data.parquet
+
+# Source datasets. Large, redistributable from their original source, and not
+# needed to set the project up -- see the README for the download link.
+Dataset/
+*.csv
+!supabase/**/*.csv
+
+# ---------------------------------------------------------------------------
+# Dependencies and build output
+# ---------------------------------------------------------------------------
+node_modules/
+.next/
+out/
+build/
+dist/
+next-env.d.ts
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Python
+services/venv/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# ---------------------------------------------------------------------------
+# Logs and local run artifacts
+# ---------------------------------------------------------------------------
+*.log
+next.stdout.log
+next.stderr.log
+services/analytics-worker/worker.stdout.log
+services/analytics-worker/worker.stderr.log
+
+# Generated benchmark output. Re-created by
+# services/analytics-worker/app/benchmark.py; the committed copy went stale
+# immediately and disagreed with the code that produced it.
+services/analytics-worker/benchmark-report.json
+services/analytics-worker/benchmark-report.md
+
+# ---------------------------------------------------------------------------
+# Editor and OS
+# ---------------------------------------------------------------------------
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Internal working documents -- superseded planning and defect-tracking notes.
+# Kept locally for reference; not part of the published project.
+docs/internal/
+db/

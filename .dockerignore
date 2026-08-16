@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.env*
+!.env.example
+services/venv
+services/**/.env
+services/**/.pytest_cache
+services/**/__pycache__
+services/**/*.log
+services/**/*.parquet
+services/**/.veil-storage
+*.log
+coverage
